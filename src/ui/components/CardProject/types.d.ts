@@ -1,0 +1,7 @@
+import { IProjectResponse } from "@/types/project.types";
+
+export interface ICardProjectProps {
+    project: IProjectResponse;
+}
+
+export interface ICreateDateProps extends Pick<IProjectResponse, "createdAt"> { }

@@ -1,3 +1,4 @@
+import { IProjectResponse } from "@/types/project.types";
 import { create } from "zustand";
 
 interface IModalState {
@@ -9,13 +10,13 @@ interface IModalState {
     clearDeleteProject: () => void;
     page: number;
     setPage: (page: number) => void;
-    lengthPage: number;
-    setLengthPage: (lengthPage: number) => void;
-    offset: number;
-    setOffset: (offset: number) => void;
+    projects: IProjectResponse[]
+    setProjects: (projects: IProjectResponse[]) => void;
+    pageSize: number;
+    getProjectsForPage: (page: number) => IProjectResponse[];
 }
 
-export const useDataStore = create<IModalState>((set) => ({
+export const useDataStore = create<IModalState>((set, get) => ({
     isOpenModal: false,
     idDeleteProject: "",
     clearDeleteProject: () => set({ idDeleteProject: "" }),
@@ -24,8 +25,14 @@ export const useDataStore = create<IModalState>((set) => ({
     closeModal: () => set({ isOpenModal: false }),
     page: 1,
     setPage: (page: number) => set({ page }),
-    lengthPage: 10,
-    setLengthPage: (lengthPage: number) => set({ lengthPage }),
-    offset: 0,
-    setOffset: (offset: number) => set({ offset }),
+    projects: [],
+    setProjects: (projects: IProjectResponse[]) => set({ projects }),
+    pageSize: 10,
+    currentPage: [],
+    getProjectsForPage: (page: number) => {
+        const { projects, pageSize } = get();
+        const startIndex = (page - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        return projects.slice(startIndex, endIndex);
+    }
 }))

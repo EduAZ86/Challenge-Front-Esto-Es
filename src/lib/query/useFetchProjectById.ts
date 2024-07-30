@@ -4,9 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const getDataProjectById = async (id: string) => {
     try {
-        const { data } = await fetchData.get(`/projects/${id}`);
-        console.log(data);
-        
+        const { data } = await fetchData.get(`/projects/${id}`);        
         return data.data.response as IProjectResponse;
     } catch (error) {
         console.error(error);

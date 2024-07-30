@@ -10,8 +10,6 @@ export const deleteProject = async (id: string) => {
         throw error;
     }
 }
-
-
 export const useDeleteProject = () => {
     return useMutation({
         mutationFn: deleteProject,

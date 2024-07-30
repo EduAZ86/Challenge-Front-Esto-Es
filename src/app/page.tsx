@@ -1,5 +1,6 @@
-import { Button, CardList } from "@/ui";
-import { Modal } from "@/ui/components/Modal/Modal";
+import { CardList } from "@/ui";
+import { Pagination } from "@/ui/components/Pagination/Pagination";
+
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
     justify-start items-center
     bg-light-background dark:bg-dark-background
     `}>
+      <Pagination />
       <CardList />
 
     </main>

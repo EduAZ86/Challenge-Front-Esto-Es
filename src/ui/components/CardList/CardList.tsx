@@ -8,7 +8,7 @@ import { useFetchProjects } from "@/lib/query/useFetchProjects";
 import { useDeleteProject } from "@/lib/query/useDeleteProject";
 
 export const CardList: FC = () => {
-    const { idDeleteProject, clearDeleteProject, setProjects, page, pageSize, setPage } = useDataStore();
+    const { idDeleteProject, clearDeleteProject, setProjects, page, pageSize, searchQuery } = useDataStore();
     const { isOpenModal, closeModal } = useDataStore()
     const deleteProjectMutation = useDeleteProject();
     const { data: projects, refetch } = useFetchProjects();
@@ -35,8 +35,12 @@ export const CardList: FC = () => {
     }
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const currentProjects = projects?.slice(startIndex, endIndex);
-
+    
+    const filteredProjects = projects?.filter(project =>
+        project.projectName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const currentProjects = filteredProjects?.slice(startIndex, endIndex);
+    
     return (
         <div
             className={`

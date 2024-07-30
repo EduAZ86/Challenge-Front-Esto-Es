@@ -14,6 +14,8 @@ interface IModalState {
     setProjects: (projects: IProjectResponse[]) => void;
     pageSize: number;
     getProjectsForPage: (page: number) => IProjectResponse[];
+    searchQuery: string;
+    setSearchQuery: (query: string) => void;
 }
 
 export const useDataStore = create<IModalState>((set, get) => ({
@@ -28,7 +30,9 @@ export const useDataStore = create<IModalState>((set, get) => ({
     projects: [],
     setProjects: (projects: IProjectResponse[]) => set({ projects }),
     pageSize: 10,
-    currentPage: [],
+    searchQuery: "",
+    setSearchQuery: (query: string) => set({ searchQuery: query }),
+    
     getProjectsForPage: (page: number) => {
         const { projects, pageSize } = get();
         const startIndex = (page - 1) * pageSize;

@@ -1,5 +1,5 @@
-import { CardList } from "@/ui";
-import { Pagination } from "@/ui/components/Pagination/Pagination";
+import { CardList, Pagination, SearchBar } from "@/ui";
+
 
 
 export default function Home() {
@@ -12,6 +12,7 @@ export default function Home() {
     justify-start items-center
     bg-light-background dark:bg-dark-background
     `}>
+      <SearchBar />
       <Pagination />
       <CardList />
 

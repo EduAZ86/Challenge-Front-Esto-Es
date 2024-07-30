@@ -85,8 +85,6 @@ export const FormProject: FC<IFormProjectProps> = ({
                     name="projectName"
                     requiredMessage="Project name is required"
                     register={register}
-
-
                 />
                 <InputField
                     label="Project Description"
@@ -96,7 +94,6 @@ export const FormProject: FC<IFormProjectProps> = ({
                     name="projectDescription"
                     requiredMessage="Project Description is required"
                     register={register}
-
                 />
                 <Select
                     key={"projectManager"}

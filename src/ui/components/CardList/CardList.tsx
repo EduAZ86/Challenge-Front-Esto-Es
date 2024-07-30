@@ -37,7 +37,7 @@ export const CardList: FC = () => {
     const endIndex = startIndex + pageSize;
     
     const filteredProjects = projects?.filter(project =>
-        project.projectName.toLowerCase().includes(searchQuery.toLowerCase())
+        project.projectName?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
     );
     const currentProjects = filteredProjects?.slice(startIndex, endIndex);
     

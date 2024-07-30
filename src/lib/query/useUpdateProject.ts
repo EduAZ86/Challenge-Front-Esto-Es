@@ -16,10 +16,7 @@ export const useUpdateProject = () => {
         mutationFn: ({ id, project }: { id: string, project: IProjectForm }) => updateProject(id, project), // Función de mutación para actualizar el proyecto
         onError: (error) => {
             console.error("Error updating project:", error);
-        },
-        onSuccess: (data) => {
-            console.log("Project updated successfully:", data);
-        }
+        }      
     });
 };
 

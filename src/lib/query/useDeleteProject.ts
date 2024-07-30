@@ -15,10 +15,7 @@ export const useDeleteProject = () => {
         mutationFn: deleteProject,
         onError: (error) => {
             console.error("Error deleting project:", error);
-        },
-        onSuccess: (data) => {
-            console.log("Project deleted successfully:", data);
-        }
+        }        
     });
 };
 

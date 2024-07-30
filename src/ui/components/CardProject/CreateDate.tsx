@@ -10,7 +10,7 @@ export const CreateDate: FC<ICreateDateProps> = ({ createdAt }) => {
     return (
         <p
             className={`
-                text-dark-secondary
+                text-light-text dark:text-dark-text opacity-45
                 text-[10px] font-[400]
                 text-end
             `}

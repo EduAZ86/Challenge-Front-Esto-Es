@@ -12,15 +12,18 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.51.15",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/node": "^20",

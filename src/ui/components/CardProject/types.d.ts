@@ -5,3 +5,11 @@ export interface ICardProjectProps {
 }
 
 export interface ICreateDateProps extends Pick<IProjectResponse, "createdAt"> { }
+
+export interface IMenuButtonProps {
+    projectId: string;
+}
+
+export interface ITogleMenuProps {
+    projectId: string;
+}

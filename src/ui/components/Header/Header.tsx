@@ -1,12 +1,28 @@
 import { FC } from "react";
-import Image from 'next/image';
+import { NavBar } from "../NavBar/NavBar";
+import ThemeSwitcher from "@/ui/theme/ThemeSwitcher";
 
 export const Header: FC = () => {
     return (
         <header
-            className="w-full h-10 p-2 flex items-center justify-start"
+            className={`
+                w-full h-20 
+                bg-light-background dark:bg-red-500
+               flex flex-col               
+                items-center 
+                justify-start 
+                relative
+                `}
         >
-            <Image src="/logo.png" alt="Logo" width={32} height={32} />
+            <div
+                className={`
+                w-full h-10
+                 flex flex-row items-center justify-between px-4                
+                 `} >
+                <img src="/logo.png" alt="logo" className="h-8" />
+                <ThemeSwitcher />
+            </div>
+            <NavBar />
         </header>
     )
 }

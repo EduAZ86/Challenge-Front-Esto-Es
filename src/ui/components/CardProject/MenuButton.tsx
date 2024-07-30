@@ -4,21 +4,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useState } from "react";
 import { MenuToggle } from "./TogleMenu";
 import { IMenuButtonProps } from "./types";
+import { useDataStore } from "@/lib/zustand/useDataStore";
 
 export const MenuButton: FC<IMenuButtonProps> = ({ projectId }) => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const { setIdDeleteProject } = useDataStore();
 
-    const toggleMenu = () => setIsOpen(!isOpen);
+    const toggleMenu = () => {
+        setIdDeleteProject(projectId);
+        setIsOpen(!isOpen);
+    }
 
     return (
         <div
-            onClick={toggleMenu}        
+            onClick={toggleMenu}
             className={`
             w-6 h-6
             absolute top-4 right-4
             flex items-center justify-center           
-            text-xl
+            text-xl cursor-pointer
             `}
         >
             <FontAwesomeIcon

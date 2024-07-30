@@ -6,6 +6,7 @@ interface IModalState {
     closeModal: () => void;
     setIdDeleteProject: (id: string) => void;
     idDeleteProject: string;
+    clearDeleteProject: () => void;
     page: number;
     setPage: (page: number) => void;
     lengthPage: number;
@@ -17,9 +18,10 @@ interface IModalState {
 export const useDataStore = create<IModalState>((set) => ({
     isOpenModal: false,
     idDeleteProject: "",
+    clearDeleteProject: () => set({ idDeleteProject: "" }),
+    setIdDeleteProject: (id: string) => set({ idDeleteProject: id }),
     openModal: () => set({ isOpenModal: true }),
     closeModal: () => set({ isOpenModal: false }),
-    setIdDeleteProject: (id: string) => set({ idDeleteProject: id }),
     page: 1,
     setPage: (page: number) => set({ page }),
     lengthPage: 10,

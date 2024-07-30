@@ -5,14 +5,28 @@ import { Modal } from "../Modal/Modal";
 import { Button } from "../Button/Button";
 import { useDataStore } from "@/lib/zustand/useDataStore";
 import { useFetchProjects } from "@/lib/query/useFetchProjects";
+import { useDeleteProject } from "@/lib/query/useDeleteProject";
 
 export const CardList: FC = () => {
-
+    const { idDeleteProject, clearDeleteProject } = useDataStore();
     const { isOpenModal, closeModal } = useDataStore()
+    const deleteProjectMutation = useDeleteProject();
+    const { data: projects, refetch } = useFetchProjects();
     const onClose = () => {
+        clearDeleteProject();
         closeModal();
     }
-    const { data: projects } = useFetchProjects();
+    const handleDelete = async () => {
+        if (idDeleteProject && idDeleteProject.length > 0) {
+            try {
+                await deleteProjectMutation.mutateAsync(idDeleteProject);
+                await refetch();
+                onClose();
+            } catch (error) {
+                console.error("Error deleting project:", error);
+            }
+        }
+    }
     return (
         <div
             className={`
@@ -38,10 +52,12 @@ export const CardList: FC = () => {
                 >
                     <Button
                         text="Delete"
+                        onClick={handleDelete}
                     />
                     <Button
                         text="Cancel"
                         onClick={onClose}
+
                     />
 
                 </div>

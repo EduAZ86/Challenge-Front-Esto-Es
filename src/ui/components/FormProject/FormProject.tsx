@@ -1,5 +1,5 @@
 "use client"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Form } from "../Form/Form"
 import { InputField } from "../InputField/InputField"
 import { useForm } from "react-hook-form"
@@ -14,6 +14,7 @@ import { validationUserSchema } from "./validationProjectSchema"
 import { IProjectForm } from "@/types/project.types"
 import { useCreateProject } from "@/lib/query/useCreateProject"
 import { useUpdateProject } from "@/lib/query/useUpdateProject"
+import { useFetchProjectById } from "@/lib/query/useFetchProjectById"
 
 
 export const FormProject: FC<IFormProjectProps> = ({
@@ -27,6 +28,22 @@ export const FormProject: FC<IFormProjectProps> = ({
     const { handleSubmit, register, reset, formState: { errors } } = useForm({
         resolver: zodResolver(validationUserSchema)
     })
+    if (variant === "update" && projectId) {
+
+        const { data: projectData } = useFetchProjectById(projectId);
+
+        useEffect(() => {
+            reset({
+                projectName: projectData?.projectName,
+                projectDescription: projectData?.projectDescription,
+                projectManager: projectData?.projectManager,
+                assignee: projectData?.assingnedPerson,
+                projectStatus: projectData?.projectStatus
+            });
+
+        }, [projectData, reset, variant]);
+    }
+
     const createProjectMutation = useCreateProject()
     const updateProjectMutation = useUpdateProject()
 

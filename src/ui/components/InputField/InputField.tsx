@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { IInputFieldProps } from "./types";
 
-export const InputField: FC<IInputFieldProps> = ({
-    errors,
+export const InputField: FC<IInputFieldProps> = ({   
     register,
     label,
     id,

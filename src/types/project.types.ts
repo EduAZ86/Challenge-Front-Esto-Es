@@ -1,21 +1,17 @@
 
-type ProyecjtStatus = "Iniciado" | "En progreso" | "Finalizado";
+type ProyecjtStatus = "Iniciado" | "En progreso" | "Finalizado" | string;
 
-type Person = {
-    name: string;
-    email: string;
-    ocupation: string;
-    image: string;
-}
 
-type Manager = Person;
-
-export interface IProject {
+export interface IProjectForm {
     projectName: string;
     projectDescription: string;
-    projectManager: Manager;
-    assingnedPerson: Person;
+    projectManager: string;
+    assingnedPerson: string;
     projectStatus: ProyecjtStatus;
+
+}
+export interface IProject extends IProjectForm {
+
     createdAt: Date;
     updatedAt?: Date;
 }

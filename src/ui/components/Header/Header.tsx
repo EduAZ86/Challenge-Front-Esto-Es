@@ -7,7 +7,7 @@ export const Header: FC = () => {
         <header
             className={`
                 w-full h-20 
-                bg-light-background dark:bg-red-500
+                bg-light-background dark:bg-dark-background
                flex flex-col               
                 items-center 
                 justify-start 

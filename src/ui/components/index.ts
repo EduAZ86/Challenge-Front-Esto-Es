@@ -4,3 +4,4 @@ export { ProjectCard } from './CardProject/CardProject';
 export { Header } from './Header/Header';
 export { NavBar } from './NavBar/NavBar';
 export { Modal } from './Modal/Modal';
+export { FormProject } from './FormProject/FormProject';

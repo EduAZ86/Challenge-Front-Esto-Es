@@ -7,18 +7,16 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 
-
-
 export const NavBar: FC = () => {
     const pathname = usePathname();
 
 
     const titles: { [key: string]: string } = {
-        "/": "Projects",
-        "/addProject": "Add Project",
-        "/editProject": "Edit Project"
+        "/": "My projects",
+        "/createProject": "Add project",
+        "/editProject": "Edit project"
     };
-    const title = titles[pathname] || "Projects";
+    const title = titles[pathname] || "Edit project";
     return (
         <nav
             className={`
@@ -30,7 +28,7 @@ export const NavBar: FC = () => {
         >{
                 pathname === "/" ?
                     <Link
-                        href="/addProject"
+                        href="/createProject"
                         className={`
                             h-8 w-fit
                             px-4

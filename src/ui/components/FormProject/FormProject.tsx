@@ -1,65 +1,120 @@
+"use client"
 import { FC } from "react"
 import { Form } from "../Form/Form"
 import { InputField } from "../InputField/InputField"
 import { useForm } from "react-hook-form"
+import { Button } from "../Button/Button"
+import { Select } from "../Select/Select"
+import { managers } from "@/utils/exampleManagers"
+import { status } from "@/utils/exampleStatus"
+import { assignedPersons } from "@/utils/examplePerson"
+import { IFormProjectProps } from "./types"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { validationUserSchema } from "./validationProjectSchema"
+import { IProjectForm } from "@/types/project.types"
+import { useCreateProject } from "@/lib/query/useCreateProject"
+import { useUpdateProject } from "@/lib/query/useUpdateProject"
 
-export const FormProject: FC = () => {
 
-    const { handleSubmit, register, reset, formState: { errors } } = useForm()
+export const FormProject: FC<IFormProjectProps> = ({
+    name,
+    title,
+    textButton,
+    variant,
+    projectId
+}) => {
+
+    const { handleSubmit, register, reset, formState: { errors } } = useForm({
+        resolver: zodResolver(validationUserSchema)
+    })
+    const createProjectMutation = useCreateProject()
+    const updateProjectMutation = useUpdateProject()
+
     const onSubmit = handleSubmit(async (data) => {
-        const newUser: INewUser = {
-            email: data.email,
-            password: data.password,
-            username: data.user,
-            role: "user"
-        };
-        await userRegister(newUser);
+        const dataProject: IProjectForm = {
+            projectName: data.projectName,
+            projectDescription: data.projectDescription,
+            projectManager: data.projectManager,
+            assingnedPerson: data.assignee,
+            projectStatus: data.projectStatus
+        }
+        if (variant === "create") {
+            createProjectMutation.mutate(dataProject)
+        }
+        if (variant === "update" && projectId) {
+            updateProjectMutation.mutate({ id: projectId, project: dataProject })
+        }
 
-        signIn("credentials", {
-            email: data.email,
-            password: data.password,
-            user: data.user,
-            callbackUrl: "/",
-        });
         reset();
     })
     return (
         <div
             className={`
             w-full h-full
-            flex flex-col
-            items-center justify-center gap-2                
+            flex flex-col           
+            items-center justify-center                        
         `}
         >
             <Form
-                title="Create Project"
-                name="createProject"
+                title={title}
+                name={name}
                 onSubmit={onSubmit}
             >
 
+                <InputField
+                    label="Project Name"
+                    placeholder="Project Name"
+                    type="text"
+                    id="projectName"
+                    name="projectName"
+                    requiredMessage="Project name is required"
+                    register={register}
+
+
+                />
+                <InputField
+                    label="Project Description"
+                    placeholder="Project Description"
+                    type="text"
+                    id="projectDescription"
+                    name="projectDescription"
+                    requiredMessage="Project Description is required"
+                    register={register}
+
+                />
+                <Select
+                    key={"projectManager"}
+                    options={managers}
+                    label="Project Manager"
+                    register={register}
+                    name="projectManager"
+                />
+                <Select
+                    key={"assignee"}
+                    options={assignedPersons}
+                    label="Assignee"
+                    register={register}
+                    name="assignee"
+                />
+                <Select
+                    key={"projectStatus"}
+                    options={status}
+                    label="Project Status"
+                    register={register}
+                    name="projectStatus"
+                />
+                <Button
+                    text={textButton}
+                    type="submit"
+                />
+                <div className="mt-4">
+                    {Object.keys(errors).map((key) => (
+                        <div key={key} className="text-light-error text-xs dark:text-dark-error">
+                            {errors[key]?.message as string}
+                        </div>
+                    ))}
+                </div>
             </Form>
-            <InputField
-                label="Project Name"
-                placeholder="Project Name"
-                type="text"
-                id="projectName"
-                name="projectName"
-                requiredMessage="Project name is required"
-                register={register}
-                errors={errors}
-
-            />
-            <InputField
-                label="Project Description"
-                placeholder="Project Description"
-                type="text"
-                id="projectDescription"
-                name="projectDescription"
-                requiredMessage="Project Description is required"
-                register={register}
-                errors={errors}
-            />
-
         </div>
     )
 }

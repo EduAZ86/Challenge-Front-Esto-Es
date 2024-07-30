@@ -1,10 +1,10 @@
 "use client"
 import { FC } from "react"
 import { ProjectCard } from "../CardProject/CardProject";
-import { testProjects } from "@/lib/testProjects";
 import { Modal } from "../Modal/Modal";
 import { Button } from "../Button/Button";
 import { useDataStore } from "@/lib/zustand/useDataStore";
+import { useFetchProjects } from "@/lib/query/useFetchProjects";
 
 export const CardList: FC = () => {
 
@@ -12,7 +12,7 @@ export const CardList: FC = () => {
     const onClose = () => {
         closeModal();
     }
-    const Projects = testProjects
+    const { data: projects } = useFetchProjects();
     return (
         <div
             className={`
@@ -22,7 +22,7 @@ export const CardList: FC = () => {
               bg-light-background dark:bg-dark-background
             `}
         >
-            {Projects.map((project) => {
+            {projects?.map((project) => {
                 return (
                     <ProjectCard key={project._id} project={project} />
                 )

@@ -12,7 +12,7 @@ export const MenuButton: FC<IMenuButtonProps> = ({ projectId }) => {
     const toggleMenu = () => setIsOpen(!isOpen);
 
     return (
-        <button
+        <div
             onClick={toggleMenu}        
             className={`
             w-6 h-6
@@ -27,7 +27,7 @@ export const MenuButton: FC<IMenuButtonProps> = ({ projectId }) => {
             {isOpen &&
                 <MenuToggle projectId={projectId} />
             }
-        </button>
+        </div>
 
     )
 }

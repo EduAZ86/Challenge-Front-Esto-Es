@@ -21,8 +21,8 @@ export const InputField: FC<IInputFieldProps> = ({
         >
             <label
                 className={`
-                  text-light-text dark:text-dark-text font-semibold
-                  text-sm  
+                  text-light-text dark:text-dark-text
+                  text-sm  font-[400]
                 `}
             >
                 {label}
@@ -37,17 +37,16 @@ export const InputField: FC<IInputFieldProps> = ({
                 type={type}
                 placeholder={placeholder}
                 className={`
-                    w-full h-10 rounded-md
+                    w-full h-10 
+                    rounded-[4px]
                     dark:bg-dark-background bg-light-background                    
-                    px-3
+                    p-3
                     border-solid border-[1px] border-light-secondary
                     focus:outline-none focus:ring-1
-                    text-xs
+                    text-base
                     focus:ring-light-secondary dark:focus:ring-dark-secondary
                     `}
             />
-            <span className="text-light-error text-xs dark:text-dark-error">{errors[name]?.message}</span>
-
         </div>
     )
 }

@@ -10,5 +10,4 @@ export interface IInputFieldProps extends Pick<InputHTMLAttributes<HTMLInputElem
     requiredMessage?: string;
     register: UseFormRegister;
     label: string;
-    errors: FieldErrors<FieldValues>
 }

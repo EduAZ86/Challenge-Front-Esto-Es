@@ -28,21 +28,20 @@ export const FormProject: FC<IFormProjectProps> = ({
     const { handleSubmit, register, reset, formState: { errors } } = useForm({
         resolver: zodResolver(validationUserSchema)
     })
-    if (variant === "update" && projectId) {
 
-        const { data: projectData } = useFetchProjectById(projectId);
+    const { data: projectData } = useFetchProjectById((variant === "update" && projectId) ? projectId : "");
 
-        useEffect(() => {
-            reset({
-                projectName: projectData?.projectName,
-                projectDescription: projectData?.projectDescription,
-                projectManager: projectData?.projectManager,
-                assignee: projectData?.assingnedPerson,
-                projectStatus: projectData?.projectStatus
-            });
+    useEffect(() => {
+        reset({
+            projectName: projectData?.projectName,
+            projectDescription: projectData?.projectDescription,
+            projectManager: projectData?.projectManager,
+            assignee: projectData?.assingnedPerson,
+            projectStatus: projectData?.projectStatus
+        });
 
-        }, [projectData, reset, variant]);
-    }
+    }, [projectData, reset, variant]);
+
 
     const createProjectMutation = useCreateProject()
     const updateProjectMutation = useUpdateProject()

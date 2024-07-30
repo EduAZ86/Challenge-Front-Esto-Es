@@ -18,14 +18,14 @@ const config: Config = {
       colors: {
         light: {
           'primary': '#F5222D',
-          'secondary': '#BDBDBD',
+          'secondary': '#D9D9D9',
           'background': '#FFFFFF',       
           'text': '#000000',
           'error': '#F44336'
         },
         dark: {
           'primary': '#F5222D',
-          'secondary': '#BDBDBD',
+          'secondary': '#D9D9D9',
           'background': '#000000',     
           'text': '#FFFFFF',
           'error': '#F44336'

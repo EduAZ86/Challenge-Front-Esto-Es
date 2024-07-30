@@ -6,6 +6,9 @@ import { Button } from "../Button/Button";
 import { useDataStore } from "@/lib/zustand/useDataStore";
 import { useFetchProjects } from "@/lib/query/useFetchProjects";
 import { useDeleteProject } from "@/lib/query/useDeleteProject";
+import { ColumnTitle } from "./ColumnTitle";
+
+const columns = ["Project info", "Project Manager", "Assigned to", "Status", "Actions"];
 
 export const CardList: FC = () => {
     const { idDeleteProject, clearDeleteProject, setProjects, page, pageSize, searchQuery } = useDataStore();
@@ -35,21 +38,42 @@ export const CardList: FC = () => {
     }
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    
+
     const filteredProjects = projects?.filter(project =>
         project.projectName?.toLowerCase().includes(searchQuery?.toLowerCase() || "")
     );
     const currentProjects = filteredProjects?.slice(startIndex, endIndex);
-    
+
     return (
         <div
             className={`
-              w-full h-min-screen
+              w-full
+              md:px-12 md:py-8 
+              h-min-screen
               display flex flex-col
               items-start justify-center
-              bg-light-background dark:bg-dark-background
+             
+                 md:bg-light-secondary
             `}
         >
+            <div
+                className={
+                    `
+                    w-full hidden
+                    md:flex flex-row
+                    items-center justify-between
+                    p-4
+                     bg-light-background dark:bg-dark-background
+                    `
+                }
+            >
+                {columns.map((column, index: number) => {
+                    return (
+                        <ColumnTitle key={`${index}-${column}`} title={column} />
+                    )
+                })}
+
+            </div>
             {currentProjects?.map((project) => {
                 return (
                     <ProjectCard key={project._id} project={project} />

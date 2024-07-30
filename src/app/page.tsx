@@ -10,12 +10,11 @@ export default function Home() {
     flex-col   
     w-full
     justify-start items-center
-    bg-light-background dark:bg-dark-background
+    bg-light-background dark:bg-dark-background 
     `}>
       <SearchBar />
       <Pagination />
       <CardList />
-
     </main>
   );
 }

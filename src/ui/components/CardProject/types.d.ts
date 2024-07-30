@@ -13,3 +13,9 @@ export interface IMenuButtonProps {
 export interface ITogleMenuProps {
     projectId: string;
 }
+
+export interface IProfilePersonProps {
+    alt: string;
+    src: string;
+    name: string;
+}
